@@ -1,7 +1,9 @@
 from datetime import datetime
 import json
 import os
+import time
 from google import genai
+frome google.genai import errors
 import streamlit as st
 import streamlit.components.v1 as components
 
@@ -118,11 +120,19 @@ if student_msg:
   ])
 
   if client:
-    res = client.models.generate_content(
-        model="gemini-3.8-flash-lite",
-        contents=f"سجل الحوار:\n{history_text}\n\nرد الآن كزميل طالب:",
-        config={"system_instruction": system_instruction, "temperature": 0.4},
-    )
+    res = None
+        for attempt in range(3):
+            try:
+                res = client.models.generate_content(
+                    model="gemini-3.8-flash-lite",
+                    contents=f"سجل الحوار:\n\n{history_text}\n\nرد الآن كزميل طالب:",
+                    config={"system_instruction": system_instruction, "temperature": 0.4},
+                )
+                break
+            except errors.ServerError:
+                if attempt == 2:
+                    raise
+                time.sleep(1.5)
     reply = res.text.strip()
   else:
     reply = "يرجى ضبط مفتاح GEMINI_API_KEY أولاً."
