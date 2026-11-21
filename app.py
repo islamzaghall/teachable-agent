@@ -124,7 +124,7 @@ if student_msg:
     for attempt in range(3):
             try:
                 res = client.models.generate_content(
-                    model="gemini-3.8-flash-lite",
+                    model="gemini-3.5-flash",
                     contents=f"سجل الحوار:\n\n{history_text}\n\nرد الآن كزميل طالب:",
                     config={"system_instruction": system_instruction, "temperature": 0.4},
                 )
