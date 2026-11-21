@@ -119,7 +119,7 @@ if student_msg:
 
   if client:
     res = client.models.generate_content(
-        model="gemini-flash-lite-latest",
+        model="gemini-2.5-flash",
         contents=f"سجل الحوار:\n{history_text}\n\nرد الآن كزميل طالب:",
         config={"system_instruction": system_instruction, "temperature": 0.4},
     )
