@@ -3,7 +3,7 @@ import json
 import os
 import time
 from google import genai
-frome google.genai import errors
+from google.genai import errors
 import streamlit as st
 import streamlit.components.v1 as components
 
