@@ -121,7 +121,7 @@ if student_msg:
 
   if client:
     res = None
-        for attempt in range(3):
+    for attempt in range(3):
             try:
                 res = client.models.generate_content(
                     model="gemini-3.8-flash-lite",
